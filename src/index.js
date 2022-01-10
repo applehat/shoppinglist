@@ -28,6 +28,11 @@ const theme = createTheme({
     },
   },
   components: {
+    TextField: {
+      helperText: {
+        marginLeft: 0
+      }
+    },
     MuiCssBaseline: {
       styleOverrides: `
         @font-face {

@@ -145,10 +145,10 @@ function App() {
     }
 
     return (
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Shopping List</DialogTitle>
+      <Dialog open={open} onClose={handleClose} PaperProps={{ style: { borderRadius: 0, borderBottom: '5px solid #4D81B7', minHeight: '768px' } }}>
+        <DialogTitle sx={{background: '#FAFAFA', borderBottom: '1px solid #D5DFE9', fontFamily: 'Dosis', textTransform: 'uppercase'}}>Shopping List</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{color: "#000"}}>
+          <DialogContentText sx={{color: "#000", padding: '20px 0'}}>
             {item ? (
               <>
                 <Typography sx={{ fontSize: '18px' }}>Edit an Item</Typography>
@@ -161,7 +161,14 @@ function App() {
               </>
             )}
           </DialogContentText>
-      
+            <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { margin: '10px 0' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
             <TextField
               id="name"
               label="Item Name"
@@ -181,10 +188,17 @@ function App() {
               minRows={3}
               value={description}
               error={descriptionError}
-              helperText={descriptionError ? "Please enter a description" : ""}
+              helperText={descriptionError ? "Please enter a description" : `${description.length}/100`}
+              FormHelperTextProps={!descriptionError ? {
+                style: {
+                  position: 'absolute',
+                  bottom: '5px',
+                  right: '0px',
+                }
+              } : {}}
               onChange={(e) => setDescription(e.target.value)}
+              inputProps={{ maxLength: 100 }}
             />
-    
             <TextField
               variant="outlined"
               fullWidth
@@ -194,11 +208,9 @@ function App() {
               select
               label="How Many"
             >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
+              {[...Array(10).keys()].map(i => (
+                <MenuItem key={`menuitem${i+1}`} value={i+1}>{i+1}</MenuItem>
+              ))}
             </TextField>
             {item && (
               <FormControlLabel control={<Checkbox  
@@ -206,10 +218,11 @@ function App() {
                 onChange={(e) => setComplete(e.target.checked)}
               />} label="Purchased" />
             )}
+            </Box>
       
 
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{padding: '20px'}}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button variant="contained" color="button" onClick={handleClickSave}>{item ? "Save Item" : "Add Task"}</Button>
         </DialogActions>
