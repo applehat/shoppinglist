@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
@@ -17,13 +16,15 @@ const theme = createTheme({
     secondary: {
       main: '#f50057',
     },
+    button: {
+      main: '#1871E8',
+      contrastText: '#fff',
+    }
   },
   typography: {
     fontFamily: '"Nunito", sans-serif',
-    h6: {
-      fontFamily: '"Dosis", sans-serif',
-      textTransform: 'uppercase',
-      padding: '1rem',
+    button: {
+      textTransform: "none"
     },
   },
   components: {
