@@ -6,6 +6,9 @@ This app makes the assumption that you have an instance of [DataPond](https://gi
 
 The default dataset in DataPond is catered to this app, tho it should work fine with an empty dataset as well.
 
+## Why
+Mainly an excuse to continue learning React, as well as something to consume [DataPond](https://github.com/applehat/datapond)
+
 ## Running
 
 ### `npm start`
